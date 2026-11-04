@@ -1,0 +1,13 @@
+# Archives
+*.zip
+CampusOne-Complete-Project.zip
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node modules / temp
+node_modules/
+.env.local
+.env

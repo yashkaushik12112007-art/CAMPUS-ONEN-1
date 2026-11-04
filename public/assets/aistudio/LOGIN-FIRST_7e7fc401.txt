@@ -1,0 +1,2 @@
+CampusOne is configured to open login.html first when the site is opened.
+After selecting a demo role or logging in, the existing dashboard flow is unchanged.

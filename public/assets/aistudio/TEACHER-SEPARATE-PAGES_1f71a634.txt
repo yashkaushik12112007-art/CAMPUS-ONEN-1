@@ -1,0 +1,6 @@
+Teacher tools are now on separate pages:
+- pages/teacher-tomorrow.html
+- pages/teacher-salary.html
+- pages/teacher-attendance.html
+- pages/teacher-notices.html
+Shared services remain separate and shared.

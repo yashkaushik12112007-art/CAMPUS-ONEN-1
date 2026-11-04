@@ -1,0 +1,8 @@
+CampusOne latest teacher update
+1. Timetable redesigned as five colorful lecture cards with better spacing and typography.
+2. Each of five courses has a unique 40-student roster.
+3. Teacher notices redesigned as a faculty communication centre; each of the four notices has a real PDF file.
+4. Added Create / Use Another Campus Profile on login for demo customization.
+5. Custom teacher profiles still receive the five-course timetable and salary/attendance/notices.
+6. Shared campus service pages now preserve the Teacher Portal sidebar when a teacher is logged in.
+7. Demo database key bumped to v4 so fresh unique roster data loads.

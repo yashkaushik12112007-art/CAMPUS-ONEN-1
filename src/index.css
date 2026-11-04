@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  --color-deep-navy: #17324D;
+  --color-navy-dark: #0F1F2E;
+  --color-royal-blue: #2463A6;
+  --color-royal-blue-hover: #1D538D;
+  --color-teal: #148A8A;
+  --color-teal-hover: #106E6E;
+  --color-bg: #F5F7FA;
+  --color-card-bg: #FFFFFF;
+  --color-dark-grey: #253341;
+  --color-muted-grey: #5B6875;
+  --color-border: #E2E8F0;
+  
+  --color-green: #277A54;
+  --color-green-light: #EBF7EE;
+  --color-amber: #E6B450;
+  --color-amber-light: #FEF8EC;
+  --color-red: #B94747;
+  --color-red-light: #FBEBEB;
+  
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --card-radius: 12px;
+  --shadow-sm: 0 1px 3px rgba(23, 50, 77, 0.06);
+  --shadow-md: 0 4px 14px rgba(23, 50, 77, 0.08);
+  --shadow-lg: 0 10px 25px rgba(23, 50, 77, 0.12);
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-dark-grey);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #EDF2F7;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Hackathon demo disclaimer banner */
+.demo-disclaimer-banner {
+  background: linear-gradient(90deg, #17324D 0%, #1D4366 100%);
+  color: #E2E8F0;
+  font-size: 0.82rem;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 50;
+}
+
+/* Base Badges */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.badge-verified {
+  background-color: #DEF7EC;
+  color: #03543F;
+  border: 1px solid #BCF0DA;
+}
+.badge-pending {
+  background-color: #FEF08A;
+  color: #713F12;
+  border: 1px solid #FDE047;
+}
+.badge-rejected {
+  background-color: #FDE8E8;
+  color: #9B1C1C;
+  border: 1px solid #FBD5D5;
+}
+.badge-submitted {
+  background-color: #E1EFFE;
+  color: #1E429F;
+  border: 1px solid #C3DDFD;
+}
+.badge-teal {
+  background-color: #E6F6F6;
+  color: #0E5E5E;
+  border: 1px solid #B8E4E4;
+}
+
+/* Presentation Slide Deck styles */
+.slide-active {
+  animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

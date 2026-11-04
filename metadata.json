@@ -1,0 +1,6 @@
+{
+  "name": "CampusOne",
+  "description": "Unified college operating platform connecting academics, role-based workflows, next-day preparedness, campus services, and CampusBot AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

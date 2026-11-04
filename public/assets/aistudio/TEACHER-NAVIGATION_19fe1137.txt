@@ -1,0 +1,2 @@
+Teacher navigation is now truly page-based. Teacher login/role dashboard redirects to pages/teacher-tomorrow.html.
+Sidebar links open only the selected page: timetable, attendance, salary, notices.

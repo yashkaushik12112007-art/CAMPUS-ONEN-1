@@ -1,0 +1,157 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Role Access - CampusOne</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #F5F7FA 0%, #E4EAF0 100%);
+    }
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+    .login-card {
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(23, 50, 77, 0.1);
+      width: 100%;
+      max-width: 480px;
+      padding: 36px;
+    }
+    .demo-role-card {
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #FAFCFE;
+      margin-bottom: 12px;
+    }
+    .demo-role-card:hover {
+      border-color: var(--color-royal-blue);
+      background: #F0F6FD;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="login-wrapper">
+
+  <!-- Official Hackathon Demo Disclaimer Banner (Page 8) -->
+  <div class="demo-disclaimer-banner">
+    <span class="badge">Demo Mode</span>
+    <span>DEMO DATA – NOT OFFICIAL. Internal Hackathon Prototype (4 November 2026).</span>
+  </div>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div class="brand-logo-icon" style="margin: 0 auto 12px; width: 48px; height: 48px; font-size: 1.5rem;">C1</div>
+        <h2 style="font-size: 1.6rem; color: var(--color-deep-navy); margin-bottom: 4px;">CampusOne Portal</h2>
+        <p style="color: var(--color-muted-grey); font-size: 0.88rem;">Sign in with your approved campus account</p>
+      </div>
+
+      <!-- Select a role first. No role card logs the user in by itself. -->
+      <div style="margin-bottom: 24px;">
+        <div style="font-size: 0.76rem; font-weight: 700; color: var(--color-deep-navy); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px;">
+          🔐 Choose how you are entering CampusOne:
+        </div>
+        <div class="demo-role-card role-choice" data-role="student">
+          <div style="width:42px;height:42px;border-radius:50%;background:#EBF3FC;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🎓</div>
+          <div style="flex:1"><div style="font-weight:700;color:var(--color-deep-navy);font-size:.95rem">1. Student</div><div style="font-size:.78rem;color:var(--color-muted-grey)">Aarav Sharma • B.Tech CSE, 5th Sem</div></div>
+          <span class="badge badge-submitted">SELECT</span>
+        </div>
+        <div class="demo-role-card role-choice" data-role="faculty">
+          <div style="width:42px;height:42px;border-radius:50%;background:#E6F6F6;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👨‍🏫</div>
+          <div style="flex:1"><div style="font-weight:700;color:var(--color-deep-navy);font-size:.95rem">2. Teacher</div><div style="font-size:.78rem;color:var(--color-muted-grey)">Dr. Sunita Rao • CSE Faculty</div></div>
+          <span class="badge badge-teal">SELECT</span>
+        </div>
+        <div class="demo-role-card role-choice" data-role="staff">
+          <div style="width:42px;height:42px;border-radius:50%;background:#FEF7E8;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🛡️</div>
+          <div style="flex:1"><div style="font-weight:700;color:var(--color-deep-navy);font-size:.95rem">3. Other Staff</div><div style="font-size:.78rem;color:var(--color-muted-grey)">Academic Office • Administration</div></div>
+          <span class="badge badge-pending">SELECT</span>
+        </div>
+      </div>
+
+      <div id="selected-role" style="padding:10px 12px;background:#F8FAFC;border-radius:8px;margin-bottom:16px;color:var(--color-muted-grey);font-size:.84rem">Select a role above, then enter the matching login details.</div>
+      <div style="padding:12px;background:#FFF8E7;border:1px solid #F4D78A;border-radius:8px;margin-bottom:18px;font-size:.78rem;color:#7A5A00"><strong>Campus accounts:</strong><br>Use the email and password issued by your campus administrator. New self-registration is available for students only.</div>
+
+      <form id="login-form">
+        <div class="form-group"><label class="form-label" for="login-email">Campus Email / Student ID</label><input type="text" id="login-email" type="email" class="form-control" placeholder="Enter your campus email" required></div>
+        <div class="form-group"><label class="form-label" for="login-password">Password</label><input type="password" id="login-password" class="form-control" placeholder="Enter password" required></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:11px">Log In to Campus Workspace</button>
+      </form>
+      <button type="button" id="show-create-account" class="btn btn-outline" style="width:100%;margin-top:10px">＋ Create / Use Another Campus Profile</button>
+      <div id="create-account-panel" style="display:none;margin-top:16px;padding:16px;background:#F8FAFC;border:1px solid #DCE5EF;border-radius:10px">
+        <h3 style="margin:0 0 6px;color:var(--color-deep-navy)">Create a student account</h3>
+        <p style="margin:0 0 12px;color:var(--color-muted-grey);font-size:.8rem">Student self-registration uses Firebase Authentication. Teacher and staff accounts must be provisioned by an administrator.</p>
+        <div class="form-group"><label class="form-label">Full Name</label><input id="new-name" class="form-control" placeholder="e.g. Prof. Rahul Mehta"></div>
+        <div class="form-group"><label class="form-label">Campus Email</label><input id="new-email" type="email" class="form-control" placeholder="name@campusone.edu"></div>
+        <div class="form-group"><label class="form-label">New Password</label><input id="new-password" type="password" class="form-control" placeholder="At least 6 characters"></div>
+        <div class="form-group"><label class="form-label">Department (optional)</label><input id="new-dept" class="form-control" placeholder="e.g. Electronics & Communication"></div>
+        <button type="button" id="create-account" class="btn btn-primary" style="width:100%">Create Profile & Enter</button>
+      </div>
+      <div style="text-align:center;margin-top:20px;font-size:.82rem;color:var(--color-muted-grey)">Login is required. Selecting a role alone will not open the website.</div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="js/data-store.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    let selectedRole = null;
+    const roleLabels = { student: 'Student', faculty: 'Teacher', staff: 'Other Staff' };
+    document.querySelectorAll('.role-choice').forEach(card => card.addEventListener('click', () => {
+      selectedRole = card.dataset.role;
+      document.querySelectorAll('.role-choice').forEach(c => c.style.outline = 'none');
+      card.style.outline = '3px solid #2B6CB0';
+      document.getElementById('selected-role').textContent = `Selected: ${roleLabels[selectedRole]} — enter your campus credentials.`;
+    }));
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!selectedRole) return window.authService.showToast('Please choose Student, Teacher, or Other Staff first.', 'error');
+      const button = e.currentTarget.querySelector('button[type="submit"]');
+      button.disabled = true; button.textContent = 'Signing in…';
+      const result = await window.authService.loginWithCredentials(selectedRole,
+        document.getElementById('login-email').value,
+        document.getElementById('login-password').value);
+      button.disabled = false; button.textContent = 'Log In to Campus Workspace';
+      if (!result.ok) return window.authService.showToast(result.message, 'error');
+      window.authService.showToast(`Login successful — ${roleLabels[selectedRole]} workspace opening.`);
+      setTimeout(() => window.location.href = 'dashboard.html', 500);
+    });
+    document.getElementById('show-create-account').addEventListener('click',()=>{
+      const p=document.getElementById('create-account-panel'); p.style.display=p.style.display==='none'?'block':'none';
+    });
+    document.getElementById('create-account').addEventListener('click', async ()=>{
+      if(selectedRole !== 'student') return window.authService.showToast('Choose Student to self-register. Teacher and staff accounts require administrator approval.','error');
+      const button=document.getElementById('create-account');
+      button.disabled=true; button.textContent='Creating account…';
+      const result=await window.authService.createDemoAccount('student',
+        document.getElementById('new-name').value,
+        document.getElementById('new-email').value,
+        document.getElementById('new-password').value,
+        document.getElementById('new-dept').value);
+      button.disabled=false; button.textContent='Create Profile & Enter';
+      if(!result.ok)return window.authService.showToast(result.message,'error');
+      window.authService.showToast('Student account created. Opening your workspace.');
+      setTimeout(()=>window.location.href='dashboard.html',500);
+    });
+  </script>
+</body>
+</html>

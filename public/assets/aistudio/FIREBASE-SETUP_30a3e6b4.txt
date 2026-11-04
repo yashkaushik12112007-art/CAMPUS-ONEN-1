@@ -1,0 +1,84 @@
+CAMPUSONE FIREBASE BACKEND - DEPLOYMENT CHECKLIST
+=================================================
+
+WHAT THIS PACKAGE CHANGES
+- Firebase Authentication is initialized alongside Firebase App and Firestore.
+- Login uses signInWithEmailAndPassword and verifies the Firestore role profile.
+- Student registration creates a Firebase Auth account and users/{uid} profile.
+- Self-registration is STUDENT ONLY. Teacher, staff and admin roles must be assigned by a trusted administrator.
+- Firestore rules prevent users from changing their own role.
+- The public "Enter Admin Mode" shortcut has been replaced with a real staff/admin login link.
+- Existing local demo data remains the default for non-authentication campus data. Do not turn on live Firestore CRUD until collections are seeded and the rest of the app's data paths are migrated and tested.
+
+IMPORTANT: THIS IS CODE-PREPARED, NOT YET DEPLOYED
+I cannot sign in to your Firebase Console or deploy rules from this chat. Complete the console steps below before testing live accounts.
+
+1. BACK UP YOUR ORIGINAL PROJECT.
+2. Replace the matching files with this package's files:
+   js/auth.js
+   js/firebase-config.js
+   login.html
+   index.html
+   firestore.rules
+   FIREBASE-SETUP.txt
+
+3. FIREBASE CONSOLE -> Authentication -> Sign-in method:
+   Enable "Email/Password".
+
+4. Authentication -> Settings -> Authorized domains:
+   Ensure localhost and the actual domain where you host CampusOne are listed.
+   Do not test by opening HTML as file://. Run node server.js and use http://localhost:3000.
+
+5. Create or enable your campus accounts in Authentication -> Users.
+   The previous demo email/password combinations are NOT automatically Firebase accounts.
+   Create accounts using real, controlled credentials; do not publish passwords in the source code.
+
+6. For EACH existing account, create a Firestore document:
+   Collection: users
+   Document ID: the exact Firebase Authentication UID
+   Fields (examples):
+     name: "Aarav Sharma"
+     email: "aarav.sharma@campusone.edu"
+     role: "student"   (or "faculty", "staff", "admin")
+     avatar: "AS"
+     studentId: "STU202401"   (student only; use actual approved ID)
+     rollNumber: "24CSE042"   (student only)
+     course: "B.Tech CSE - 5th Sem" (student only)
+   IMPORTANT: Never create a profile with a role the account should not have.
+   Admin/staff/faculty role assignment must be done by a trusted operator.
+
+7. Firestore -> Rules:
+   Publish the contents of firestore.rules from this project.
+   Test with Firebase Rules Playground / Emulator before production use.
+   Review any additional collections your app needs before production launch.
+
+8. Student self-registration:
+   Select Student on login.html, then Create / Use Another Campus Profile.
+   New students are assigned a generated temporary studentId and rollNumber "PENDING".
+   An administrator must verify and update those academic identifiers in Firestore.
+
+9. Verify:
+   - Student can sign in and read only permitted records.
+   - Faculty can sign in only if their users/{uid}.role is faculty.
+   - Staff/admin can sign in only if their role profile matches.
+   - Wrong selected role is rejected.
+   - Logout signs out Firebase.
+   - Unauthenticated users cannot open protected dashboards.
+
+10. DO NOT set useLiveFirebase=true yet.
+    The existing application has many modules using local/demo data and expects
+    synchronous local data in places. Enabling live Firestore globally without
+    migrating and testing each module can cause partial or inconsistent behavior.
+    Keep it false until data migration and module-by-module integration are complete.
+
+ROLE MAPPING
+- Login choice "Student" -> Firestore role "student"
+- Login choice "Teacher" -> Firestore role "faculty"
+- Login choice "Other Staff" -> Firestore role "staff" or "admin"
+
+SECURITY
+- Firebase web apiKey is a public client identifier, not a service-account key.
+- Never put service-account JSON/private keys in this website.
+- Configure Firebase App Check before production if appropriate.
+- Set restrictive Auth password policy, email verification and account recovery.
+- Review rules for every new collection before launch.

@@ -1,0 +1,24 @@
+CampusOne role login update
+
+Opening the website now starts at login.html.
+
+Roles:
+1. Student
+   Email: aarav.sharma@campusone.edu
+   Password: student123
+
+2. Teacher
+   Email: sunita.rao@campusone.edu
+   Password: teacher123
+
+3. Other Staff
+   Email: admin.desk@campusone.edu
+   Password: staff123
+
+Important:
+- Clicking a role only selects the role. It does NOT log the user in.
+- The correct email and password are required.
+- Direct access to dashboard.html without a session returns to the login page.
+- Teacher view has a separate dashboard with tomorrow's teaching timetable, salary, course-wise student attendance marking, and teacher-only notices.
+- Canteen, events and other shared campus services remain available to all roles.
+- Attendance in this prototype is stored in the browser's localStorage. Firebase/Firestore can be connected to this next.

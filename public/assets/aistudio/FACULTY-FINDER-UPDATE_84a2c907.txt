@@ -1,0 +1,5 @@
+Faculty Finder updated:
+- 4 departments: CSE, IT, ECE, AI ML
+- 5 demo teachers in each department (20 total)
+- Five requested core subjects with specified faculty names
+- Local data version bumped to v5 so existing browsers load the new records

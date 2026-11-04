@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - CampusOne</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Official Hackathon Demo Disclaimer Banner (Page 8) -->
+  <div class="demo-disclaimer-banner">
+    <span class="badge">Demo Mode</span>
+    <span>DEMO DATA – NOT OFFICIAL. Internal Hackathon Prototype (4 November 2026).</span>
+  </div>
+
+  <div class="app-container">
+    <!-- Shared Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo-icon">C1</div>
+        <div class="brand-text">
+          <h1>CampusOne</h1>
+          <span>Your Entire College in One Place</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Campus Workspaces</div>
+        <a href="index.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          Campus Home
+        </a>
+        <a href="dashboard.html" class="nav-item active">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          Role Dashboard
+        </a>
+
+        <div class="nav-section-title" id="role-portal-title">Student Portal</div>
+        <a href="pages/documents.html" class="nav-item student-only-nav">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          My Documents & Fees
+        </a>
+        <a href="pages/timetable.html" class="nav-item student-only-nav">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Class Timetable
+        </a>
+        <a href="pages/academics.html" class="nav-item student-only-nav">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          Attendance & Marks
+        </a>
+        <a href="pages/student-assignments.html" class="nav-item student-only-nav">📤 Upload Assignments</a>
+
+        <div class="nav-section-title">Campus Services</div>
+        <a href="pages/faculty.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          Faculty Finder
+        </a>
+        <a href="pages/notices.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+          Notices & Circulars
+        </a>
+        <a href="pages/events.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+          Events & Workshops
+        </a>
+        <a href="pages/canteen.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Canteen Live Menu
+        </a>
+        <a href="pages/lost-found.html" class="nav-item">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          Lost & Found
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="user-avatar js-user-avatar">AS</div>
+          <div class="user-info">
+            <div class="user-name js-user-name">Aarav Sharma</div>
+            <div class="user-role-tag js-user-role">Student</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <header class="app-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+          <div class="header-title-group">
+            <h2>Welcome back, <span class="js-user-name">Aarav</span> 👋</h2>
+            <p>Unified Academic Dashboard & Next-Day Preparedness</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="role-badge-selector">
+            <span>Role:</span> <strong class="js-header-role">Student</strong>
+          </div>
+
+          <button onclick="window.dataStore.resetToDefaults(); window.location.reload();" class="btn btn-outline btn-sm" title="Reset all demo data to pristine state for judges">
+            ↺ Reset Demo Data
+          </button>
+          <a href="login.html" class="btn btn-outline btn-sm" onclick="window.authService.logout(); return false;">Sign Out</a>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <!-- Student dashboard -->
+        <div id="student-dashboard-content">
+        <!-- Main Differentiator Card: Tomorrow at College (Page 2 & Page 9) -->
+        <div id="tomorrow-card-container" class="mb-24"></div>
+
+        <!-- Quick Metrics Grid -->
+        <div id="quick-metrics-container" class="grid-4 mb-24"></div>
+
+        <!-- Two Columns: Today's Schedule & Recent Notices -->
+        <div class="grid-2 mb-24">
+          <div id="today-schedule-container"></div>
+          <div id="recent-notices-container"></div>
+        </div>
+
+        <!-- Quick Access Module Links -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🚀 Campus Quick Actions</h3>
+              <p class="card-subtitle">Jump straight into your daily student workflows</p>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <a href="pages/documents.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              📁 My Document Tracker
+            </a>
+            <a href="pages/timetable.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              📅 Full Class Timetable
+            </a>
+            <a href="pages/academics.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              📊 75% Attendance Health
+            </a>
+            <a href="pages/faculty.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              👨‍🏫 Locate Faculty Cabins
+            </a>
+            <a href="pages/canteen.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              🍽️ Cafeteria Live Menu
+            </a>
+            <a href="pages/lost-found.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              🔍 Campus Lost & Found
+            </a>
+            <a href="pages/events.html" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              🎟️ Event Registrations
+            </a>
+            <a href="pages/documents.html#fees" class="btn btn-outline" style="justify-content: flex-start; padding: 14px;">
+              💳 Fee Status & Receipts
+            </a>
+          </div>
+        </div>
+        </div>
+        <div id="teacher-dashboard-content" style="display:none"></div>
+
+        <!-- Other staff dashboard: administration-focused work area. -->
+        <div id="staff-dashboard-content" style="display:none"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="js/data-store.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/ai-assistant.js"></script>
+</body>
+</html>
+

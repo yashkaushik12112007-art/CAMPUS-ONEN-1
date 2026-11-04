@@ -1,0 +1,98 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function profile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    function hasProfile() {
+      return signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    function roleIs(role) { return hasProfile() && profile().role == role; }
+    function isAdmin() { return roleIs('admin'); }
+    function isFaculty() { return roleIs('faculty') || isAdmin(); }
+    function isStaff() { return roleIs('staff') || isAdmin(); }
+    function ownsStudentRecord(studentId) {
+      return hasProfile() && profile().studentId == studentId;
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      // Public signup can create student accounts only; privileged roles are assigned
+      // manually by a trusted administrator through Firebase Console/Admin SDK.
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.role == 'student'
+        && request.resource.data.keys().hasOnly([
+          'name','email','role','avatar','studentId','rollNumber','course','createdAt'
+        ]);
+      allow update: if isAdmin() || (signedIn() && request.auth.uid == uid
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['name','avatar','course','rollNumber']));
+      allow delete: if isAdmin();
+    }
+
+    match /students/{studentId} {
+      allow read: if isAdmin() || isFaculty() || ownsStudentRecord(studentId);
+      allow create, update, delete: if isAdmin();
+    }
+    match /documents/{docId} {
+      allow read: if isAdmin() || (signedIn() && ownsStudentRecord(resource.data.studentId));
+      allow create: if signedIn() && ownsStudentRecord(request.resource.data.studentId);
+      allow update: if isAdmin() || (signedIn()
+        && ownsStudentRecord(resource.data.studentId)
+        && request.resource.data.studentId == resource.data.studentId
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['status','submittedDate','remarks','fileUrl']));
+      allow delete: if isAdmin();
+    }
+    match /timetables/{id} {
+      allow read: if true;
+      allow write: if isFaculty();
+    }
+    match /attendance/{id} {
+      allow read: if isAdmin() || isFaculty() || ownsStudentRecord(resource.data.studentId);
+      allow create, update: if isFaculty();
+      allow delete: if isAdmin();
+    }
+    match /marks/{id} {
+      allow read: if isAdmin() || isFaculty() || ownsStudentRecord(resource.data.studentId);
+      allow write: if isFaculty();
+    }
+    match /assignments/{id} {
+      allow read: if signedIn();
+      allow write: if isFaculty();
+    }
+    match /notices/{id} {
+      allow read: if true;
+      allow write: if isFaculty() || isStaff();
+    }
+    match /events/{id} {
+      allow read: if true;
+      allow create, delete: if isAdmin() || isStaff();
+      allow update: if signedIn();
+    }
+    match /faculty/{id} {
+      allow read: if true;
+      allow write: if isAdmin() || (hasProfile() && request.auth.uid == id);
+    }
+    match /canteen/{id} {
+      allow read: if true;
+      allow write: if isAdmin() || isStaff();
+    }
+    match /lostFound/{id} {
+      allow read: if true;
+      allow create: if signedIn()
+        && !request.resource.data.keys().hasAny(['phone','phoneNumber','mobile','studentId','personalEmail']);
+      allow update: if signedIn();
+      allow delete: if isAdmin() || isStaff();
+    }
+    match /serviceRequests/{id} {
+      allow read: if isAdmin() || (signedIn() && ownsStudentRecord(resource.data.studentId));
+      allow create: if signedIn();
+      allow update, delete: if isAdmin() || isStaff();
+    }
+    // Deny everything not explicitly listed above.
+    match /{document=**} { allow read, write: if false; }
+  }
+}
